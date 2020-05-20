@@ -1,4 +1,4 @@
-// const db = require("../database/connection");
+const db = require("../database/connection");
 
 module.exports = {
   add,
@@ -16,11 +16,13 @@ function find() {
 
 function findBy(filter) {
   console.log("filter", filter);
-  return db("users as u")
-    .join("roles as r", "u.role", "r.id")
-    .where(filter)
-    .select("u.id", "u.username", "r.name as role", "u.password")
-    .orderBy("u.id");
+  return (
+    db("users as u")
+      // .join("roles as r", "u.role", "=", "r.id")
+      .where(filter)
+  );
+  // .select("u.id", "u.username", "r.name as role", "u.password")
+  // .orderBy("u.id");
 }
 
 async function add(user) {
